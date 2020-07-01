@@ -15,7 +15,7 @@ public class playerMovement : MonoBehaviour
     private void Awake() => rb = GetComponent<Rigidbody>();
 
 
-    private void Update() => PlayerInput();
+    private void Update() => playerInput = PlayerInput();
 
 
     private void FixedUpdate() => Movement();
@@ -23,14 +23,18 @@ public class playerMovement : MonoBehaviour
 
 
 
-    private void PlayerInput()
+    public static Vector3 PlayerInput()
     {
+        Vector3 playerInput = Vector3.zero;
+
         //Gets the Input values of each access
         playerInput.x = Input.GetAxisRaw("Horizontal");
         playerInput.z = Input.GetAxisRaw("Vertical");
 
         //Makes sure the Vector3 has a magnitude of 1  (prevents diagonal movement being faster than other directions)
         playerInput.Normalize();
+        
+        return playerInput;
 
     }
 
